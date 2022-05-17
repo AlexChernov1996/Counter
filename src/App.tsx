@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import Counter from './components/Counter/Counter';
 import './App.css';
-
+export type CountType = {
+    value: number
+    init: number
+    max: number
+}
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [count, setCount] = useState<CountType>({value: 0, init: 0, max: 5})
+    const addCount = () => {
+        setCount({value: count.value+1, init: count.init,max: count.max})
+    }
+    const resetCount = () => {
+        setCount({value: count.init, init: count.init,max: count.max})
+    }
+    return (
+        <div className="App">
+            <Counter addCount={addCount} count={count} resetCount={resetCount}/>
+        </div>
+    );
 }
 
 export default App;
